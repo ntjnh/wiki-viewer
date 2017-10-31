@@ -1,0 +1,89 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #5CB85C;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+h1,
+.result-title,
+.result-snip,
+#searchTerm,
+.random {
+  font-weight: 100;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#searchTerm {
+  background-color: transparent;
+  color: #fff;
+  border-style: none;
+  border-bottom: 1px solid #fff;
+  padding: 3px 5px;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+}
+
+#searchTerm:focus {
+  outline-style: none;
+}
+
+#searchTerm::placeholder {
+  color: #fff;
+}
+
+#submitSearch, .random {
+  background-color: rgba(204,255,204,0.3);
+  color: #fff;
+}
+
+#submitSearch {
+  margin-left: 0;
+  border-style: none;
+  padding: 4px 7px;
+  font-size: 1em;
+  border-radius: 3px;
+}
+
+.random {
+  display: inline-block;
+  margin: 15px 0;
+  padding: 5px 7px;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+#results {
+  display: none;
+  margin-bottom: 50px;
+}
+
+.open-page {
+  text-decoration: none;
+  color: #000;
+}
+
+.result-title,
+.result-snip
+ {
+  margin: 0;
+  background-color: rgba(204,255,204,0.3);
+  padding: 0 15px;
+  color: #fff;
+}
+
+.result-title {
+  padding-top: 10px;
+  border-radius: 4px 4px 0 0;
+}
+
+.result-snip {
+  margin-bottom: 10px;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  border-radius: 0 0 4px 4px;
+}
