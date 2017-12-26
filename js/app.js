@@ -1,39 +1,64 @@
 // Search form
-$("#search").submit(function(event) {
-  event.preventDefault();
-  var $results = $("#results");
-  $results.empty();
-  $results.hide();
-  var searchedFor = $("#searchTerm").val();
+const form = document.getElementById("search");
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const results = document.getElementById("results");
+  results.innerHTML = "";
+  results.style.display = "none";
   
-  //make link using value from form
-  var searchResults = "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=" + searchedFor;
+  // Show loading message
+  const loading = document.createElement("h2");
+  loading.textContent = "Loading...";
+  results.appendChild(loading);
   
-  //get data from api
-  $.ajax(searchResults, {
-    dataType: "JSON",
-    data: {
-      origin: "*"
-    },
-    type: "GET",
-    success: function(article) {
-      //print results 
-      for (var i = 0; i < 10; i++) {
-        //make elements
-        var $title = $("<h3>", {"class": "result-title"});
-        var $snip = $("<p>", {"class": "result-snip"});
-        var $link = $("<a>", {"target": "_blank", "class": "open-page"});
+  // make link using value from form
+  const searchTerm = document.getElementById("searchTerm");
+  const searchResults = "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=" + searchTerm.value + "&origin=*";
+  
+  // Get data from API
+  const articles = new XMLHttpRequest();
+  articles.onreadystatechange = function() {
+    if (articles.readyState === 4) {
+      if (articles.status === 200) {
+        const article = JSON.parse(articles.responseText);
         
-        $title.text(article[1][i]);
-        $snip.html(article[2][i]);
-        $link.attr("href", article[3][i]);
-        $link.append($title, $snip);
-        $results.append($link);
-        
-        $results.fadeIn(1500);
+        // If no results found
+        if (article[1].length === 0) {
+          const noResults = document.createElement("h2");
+          noResults.textContent = "There were no results found for " + searchTerm.value + ".";
+          results.appendChild(noResults);
+          loading.style.display = "none";
+          results.style.display = "block";
+        } else {
+          // Print results
+          for(let i = 0; i < article[1].length; i++) {
+            // Make elements
+            const title = document.createElement("h3");
+            title.classList.add("result-title");
+            const snip = document.createElement("p");
+            snip.classList.add("result-snip");
+            const link = document.createElement("a");
+            link.classList.add("result");
+            link.setAttribute("target", "_blank");
+            
+            // Put content in elements
+            title.textContent = article[1][i];
+            snip.innerHTML = article[2][i];
+            link.setAttribute("href", article[3][i]);
+            link.appendChild(title);
+            link.appendChild(snip);
+            results.appendChild(link);
+            
+            loading.style.display = "none";
+            results.style.display = "block";
+          }
+        }
+      } else {
+        alert("Error: " + articles.status);
       }
     }
-  });
-  $('#searchTerm').val("");
-  
+  };
+  articles.open("GET", searchResults);
+  articles.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+  articles.send();
 });
