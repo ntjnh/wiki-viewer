@@ -8,7 +8,7 @@ body, a, #searchTerm, #searchTerm::placeholder, #submitSearch {
   color: #fff;
 }
 
-h1, h2, .result-title, .result-snip, #searchTerm, .random {
+h1, h2, h3, .result-title, .result-snip, #searchTerm, .random {
   font-weight: 100;
 }
 

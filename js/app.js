@@ -24,7 +24,7 @@ form.addEventListener("submit", e => {
         
         // If no results found
         if (article[1].length === 0) {
-          const noResults = document.createElement("h2");
+          const noResults = document.createElement("h3");
           noResults.textContent = "There were no results found for " + searchTerm.value + ".";
           results.appendChild(noResults);
           loading.style.display = "none";
