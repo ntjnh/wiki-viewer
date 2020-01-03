@@ -5,23 +5,23 @@ form.addEventListener("submit", e => {
   const results = document.getElementById("results");
   results.innerHTML = "";
   results.style.display = "none";
-  
+
   // Show loading message
   const loading = document.createElement("h2");
   loading.textContent = "Loading...";
   results.appendChild(loading);
-  
+
   // make link using value from form
   const searchTerm = document.getElementById("searchTerm");
   const searchResults = "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=" + searchTerm.value + "&origin=*";
-  
+
   // Get data from API
   const articles = new XMLHttpRequest();
   articles.onreadystatechange = function() {
     if (articles.readyState === 4) {
       if (articles.status === 200) {
         const article = JSON.parse(articles.responseText);
-        
+
         // If no results found
         if (article[1].length === 0) {
           const noResults = document.createElement("h3");
@@ -35,20 +35,16 @@ form.addEventListener("submit", e => {
             // Make elements
             const title = document.createElement("h3");
             title.classList.add("result-title");
-            const snip = document.createElement("p");
-            snip.classList.add("result-snip");
             const link = document.createElement("a");
             link.classList.add("result");
             link.setAttribute("target", "_blank");
-            
+
             // Put content in elements
             title.textContent = article[1][i];
-            snip.innerHTML = article[2][i];
             link.setAttribute("href", article[3][i]);
             link.appendChild(title);
-            link.appendChild(snip);
             results.appendChild(link);
-            
+
             loading.style.display = "none";
             results.style.display = "block";
           }
