@@ -8,7 +8,7 @@ body, a, #searchTerm, #searchTerm::placeholder, #submitSearch {
   color: #fff;
 }
 
-h1, h2, h3, .result-title, .result-snip, #searchTerm, .random {
+h1, h2, h3, .result-title, #searchTerm, .random {
   font-weight: 100;
 }
 
@@ -60,15 +60,11 @@ h1, h2, h3, .result-title, .result-snip, #searchTerm, .random {
   margin-bottom: 15px;
   text-decoration: none;
   border-radius: 4px;
-  padding: 15px 15px 20px;
-}
-
-.result-title, .result-snip {
-  margin: 0;
+  padding: 15px;
 }
 
 .result-title {
-  margin-bottom: 10px;
+  margin: 0;
 }
 
 @media (min-width: 1200px) {
