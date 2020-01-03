@@ -8,6 +8,7 @@ form.addEventListener("submit", e => {
 
   // Show loading message
   const loading = document.createElement("h2");
+  loading.classList.add("loading");
   loading.textContent = "Loading...";
   results.appendChild(loading);
 
